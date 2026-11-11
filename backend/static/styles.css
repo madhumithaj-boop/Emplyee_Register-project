@@ -1,0 +1,68 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+body { background: hsl(270, 9%, 96%); color: #0f172a; padding: 2rem; }
+.container { max-width: 1400px; margin: 0 auto; }
+header { margin-bottom: 2rem; }
+header p, .char-counter, .checkbox-label, th { color: #64748b; }
+header p, .error-msg, .badge-gender { margin-top: 0.25rem; }
+
+/* Grid Layouts */
+.grid-layout { display: grid; grid-template-columns: 480px 1fr; gap: 2rem; }
+@media (max-width: 1024px) { .grid-layout { grid-template-columns: 1fr; } }
+.card { background: hwb(192 71% 7%); border: 1px solid #496d54; border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.card h2 { font-size: 1.25rem; margin-bottom: 1.25rem; }
+.form-group { margin-bottom: 1.15rem; display: flex; flex-direction: column; }
+.form-row, .label-with-counter, .radio-group, .radio-label, .checkbox-label, .table-header { display: flex; }
+.form-row { gap: 1rem; }
+.form-row .form-group { flex: 1; }
+.label-with-counter { justify-content: space-between; align-items: center; }
+label, .section-label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+.char-counter, .error-msg { font-size: 0.75rem; }
+
+/* Inputs */
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+    width: 100%; padding: 0.65rem 0.8rem; border: 1px solid #496d54; border-radius: 8px; font-size: 0.95rem; outline: none; transition: all 0.15s;
+}
+input:focus, select:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.has-error input, .has-error select, .has-error textarea { border-color: #dc2626 !important; background: #fef2f2; }
+.error-msg { display: none; color: #dc2626; font-weight: 500; }
+.has-error .error-msg { display: block; }
+
+/* Choice Group Elements */
+.radio-group { gap: 1.5rem; padding: 0.25rem 0; }
+.radio-label, .checkbox-label { align-items: center; gap: 0.4rem; font-size: 0.9rem; cursor: pointer; }
+.checkbox-label { align-items: flex-start; font-size: 0.85rem; }
+.checkbox-label input { margin-top: 2px; }
+
+/* Action Buttons */
+.btn { padding: 0.75rem 1.25rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-primary { background: #2563eb; color: #fff; width: 100%; margin-top: 0.5rem; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-edit, .btn-delete { padding: 0.35rem 0.65rem; border-radius: 4px; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+.btn-edit { background: #e0e7ff; color: #4338ca; margin-right: 0.35rem; }
+.btn-edit:hover { background: #c7d2fe; }
+.btn-delete { background: #fee2e2; color: #dc2626; }
+
+/* Directory Table */
+.table-header { justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+.table-header input { max-width: 280px; }
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.75rem 0.85rem; text-align: left; border-bottom: 1px solid #496d54; }
+th { background: #f1f5f9; font-weight: 600; }
+.badge, .badge-gender { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; background: #e2e8f0; }
+.badge-gender { background: #e0e7ff; color: #4338ca; margin-left: 0.35rem; }
+
+/* Toast Messages & Edit Modal window */
+.toast { position: fixed; top: 20px; right: 20px; padding: 0.85rem 1.5rem; border-radius: 8px; color: #fff; font-size: 0.9rem; z-index: 100; }
+.toast.success { background: #16a34a; }
+.toast.error { background: #dc2626; }
+.hidden { display: none !important; }
+
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.modal-content { width: 100%; max-width: 460px; position: relative; animation: slide 0.3s ease-out; }
+.close-btn { position: absolute; right: 1.5rem; top: 1.25rem; font-size: 1.5rem; font-weight: 700; color: #64748b; cursor: pointer; }
+.close-btn:hover { color: #dc2626; }
+
+@keyframes slide { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

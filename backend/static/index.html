@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Employee Register</h1>
+        <p>Fill out the verified employee record form below</p>
+    </header>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <main class="grid-layout">
+        <!-- Registration Form Card -->
+        <section class="card">
+            <h2>New Employee Details</h2>
+            <form id="employeeForm" novalidate>
+                <!-- 1. Full Name -->
+                <div class="form-group" id="group-fullName">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" placeholder="e.g., Sarah Connor" required autocomplete="off">
+                    <span class="error-msg" id="err-fullName"></span>
+                </div>
+
+                <!-- 2. Email & Phone -->
+                <div class="form-row">
+                    <div class="form-group" id="group-email">
+                        <label for="email">Work Email *</label>
+                        <input type="email" id="email" placeholder="sarah@enterprise.com" required>
+                        <span class="error-msg" id="err-email"></span>
+                    </div>
+                    <div class="form-group" id="group-phone">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="+1 555-019-2834" required>
+                        <span class="error-msg" id="err-phone"></span>
+                    </div>
+                </div>
+
+                <!-- 3. DOB & Job Title -->
+                <div class="form-row">
+                    <div class="form-group" id="group-dob">
+                        <label for="dob">Date of Birth (Min. 18 yrs) *</label>
+                        <input type="date" id="dob" required>
+                        <span class="error-msg" id="err-dob"></span>
+                    </div>
+                    <div class="form-group" id="group-jobTitle">
+                        <label for="jobTitle">Job Role *</label>
+                        <select id="jobTitle" required>
+                            <option value="" disabled selected>Select a role</option>
+                            <option value="AI/ML Engineer">AI/ML Engineer</option>
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="Frontend Developer">Frontend Developer</option>
+                            <option value="Data Analyst">Data Analyst</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="HR Specialist">HR Specialist</option>
+                            <option value="UI/UX Designer">UI/UX Designer</option>
+                        </select>
+                        <span class="error-msg" id="err-jobTitle"></span>
+                    </div>
+                </div>
+
+                <!-- 4. Gender (Radio Buttons) -->
+                <div class="form-group" id="group-gender">
+                    <label class="section-label">Gender *</label>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="gender" value="Male"> Male</label>
+                        <label class="radio-label"><input type="radio" name="gender" value="Female"> Female</label>
+                        <label class="radio-label"><input type="radio" name="gender" value="Other"> Other</label>
+                    </div>
+                    <span class="error-msg" id="err-gender"></span>
+                </div>
+
+                <!-- 5. Address (Textbox) -->
+                <div class="form-group" id="group-address">
+                    <div class="label-with-counter">
+                        <label for="address">Residential Address / Remarks</label>
+                        <span class="char-counter" id="addressCounter">0 / 500</span>
+                    </div>
+                    <textarea id="address" rows="2" maxlength="500" placeholder="Street address, city, state..."></textarea>
+                    <span class="error-msg" id="err-address"></span>
+                </div>
+
+                <!-- 6. Consent Checkbox -->
+                <div class="form-group checkbox-group" id="group-termsAccepted">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="termsAccepted" required>
+                        <span>I confirm all details are verified. *</span>
+                    </label>
+                    <span class="error-msg" id="err-termsAccepted"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="submitBtn">Submit Registration</button>
+            </form>
+        </section>
+
+        <!-- Directory Table Card -->
+        <section class="card table-card">
+            <div class="table-header">
+                <h2>Directory</h2>
+                <input type="text" id="searchInput" placeholder="Search...">
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Contact</th>
+                            <th>Role</th>
+                            <th>DOB</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody">
+                        <tr>
+                            <td colspan="5" class="text-center">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Edit Modal Dialog -->
+        <div id="editModal" class="modal hidden">
+            <div class="modal-content card">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h2>Edit Employee</h2>
+                <form id="editForm">
+                    <input type="hidden" id="editEmpId">
+                    <div class="form-group">
+                        <label for="editFullName">Full Name</label>
+                        <input type="text" id="editFullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">Phone Number</label>
+                        <input type="tel" id="editPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editJobTitle">Job Title</label>
+                        <select id="editJobTitle" required>
+                            <option value="AI/ML Engineer">AI/ML Engineer</option>
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="Frontend Developer">Frontend Developer</option>
+                            <option value="Data Analyst">Data Analyst</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="HR Specialist">HR Specialist</option>
+                            <option value="UI/UX Designer">UI/UX Designer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
